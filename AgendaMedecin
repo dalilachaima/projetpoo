@@ -12,6 +12,25 @@ public class AgendaMedecin {
 		this.listeRendezVous = new ArrayList<>();
 	}
 
+public boolean vérifierDisponibilité(LocalDate date, LocalTime heure) {
+        for (RendezVous rdv : listeRendezVous) {
+            if (rdv.getDate().equals(date) && rdv.getHeure().equals(heure)) {
+                return false; 
+            }
+        }
+        return true;
+}
+
+public boolean ajouterRendezVous(RendezVous rendezVous) {
+        if (vérifierDisponibilité(rendezVous.getDate(), rendezVous.getHeure())) {
+            listeRendezVous.add(rendezVous);
+            System.out.println("Rendez-vous ajouté pour " + rendezVous.getPatient().getNom()+ " " + rendezVous.getPatient().getPrenom());
+            return true;
+        }
+        System.out.println("Le médecin n'est pas disponible à cette heure.");
+        return false;
+    }
+
  public List<RendezVous> getListeRendezVous() {
         return listeRendezVous;
     }
