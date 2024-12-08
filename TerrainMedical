@@ -1,0 +1,25 @@
+class TerrainMedical {
+    double poids;
+    double taille;
+    String allergies;
+    String antecedentsChirurgicaux;
+
+    public void mettreAJourTerrain(Scanner scanner) {
+        System.out.print("Entrez le poids (kg) : ");
+        poids = scanner.nextDouble();
+        System.out.print("Entrez la taille (m) : ");
+        taille = scanner.nextDouble();
+        scanner.nextLine(); // Consomme la ligne restante
+        System.out.print("Entrez les allergies : ");
+        allergies = scanner.nextLine();
+        System.out.print("Entrez les antécédents chirurgicaux : ");
+        antecedentsChirurgicaux = scanner.nextLine();
+    }
+
+    public void afficherTerrain() {
+        System.out.println("Poids : " + poids + " kg");
+        System.out.println("Taille : " + taille + " m");
+        System.out.println("Allergies : " + allergies);
+        System.out.println("Antécédents chirurgicaux : " + antecedentsChirurgicaux);
+    }
+}
