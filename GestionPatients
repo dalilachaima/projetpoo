@@ -1,0 +1,83 @@
+class GestionPatients {
+    ArrayList<FichePatient> patients = new ArrayList<>();
+
+    public void ajouter(Scanner scanner) {
+        System.out.print("Nom : ");
+        String nom = scanner.nextLine();
+        System.out.print("Prénom : ");
+        String prenom = scanner.nextLine();
+        System.out.print("Adresse : ");
+        String adresse = scanner.nextLine();
+        System.out.print("Téléphone : ");
+        String telephone = scanner.nextLine();
+        System.out.print("Date de naissance : ");
+        String dateNaissance = scanner.nextLine();
+        System.out.print("Sexe : ");
+        String sexe = scanner.nextLine();
+
+        FichePatient patient = new FichePatient(nom, prenom, adresse, telephone, dateNaissance, sexe);
+        System.out.println("Mettez à jour le terrain médical du patient :");
+        patient.terrainMedical.mettreAJourTerrain(scanner);
+
+        patients.add(patient);
+        System.out.println("Patient ajouté avec succès !");
+    }
+
+    public void modifier(Scanner scanner) {
+        System.out.print("Entrez le nom du patient à modifier : ");
+        String nom = scanner.nextLine();
+        FichePatient patient = trouverPatient(nom);
+
+        if (patient != null) {
+            System.out.print("Nouveau prénom : ");
+            patient.prenom = scanner.nextLine();
+            System.out.print("Nouvelle adresse : ");
+            patient.adresse = scanner.nextLine();
+            System.out.print("Nouveau téléphone : ");
+            patient.telephone = scanner.nextLine();
+            System.out.print("Nouvelle date de naissance : ");
+            patient.dateNaissance = scanner.nextLine();
+            System.out.print("Nouveau sexe : ");
+patient.sexe = scanner.nextLine();
+            System.out.println("Mettez à jour le terrain médical du patient :");
+            patient.terrainMedical.mettreAJourTerrain(scanner);
+
+            System.out.println("Fiche patient modifiée avec succès !");
+        } else {
+            System.out.println("Patient introuvable.");
+        }
+    }
+
+    public void supprimer(Scanner scanner) {
+        System.out.print("Entrez le nom du patient à supprimer : ");
+        String nom = scanner.nextLine();
+        FichePatient patient = trouverPatient(nom);
+
+        if (patient != null) {
+            patients.remove(patient);
+            System.out.println("Patient supprimé avec succès !");
+        } else {
+            System.out.println("Patient introuvable.");
+        }
+    }
+
+    public void afficher() {
+        if (patients.isEmpty()) {
+            System.out.println("Aucune fiche patient disponible.");
+        } else {
+            for (FichePatient patient : patients) {
+                System.out.println("\n--- Fiche Patient ---");
+                patient.afficherFiche();
+            }
+        }
+    }
+
+    private FichePatient trouverPatient(String nom) {
+        for (FichePatient patient : patients) {
+            if (patient.nom.equalsIgnoreCase(nom)) {
+                return patient;
+            }
+        }
+        return null;
+    }
+}
