@@ -1,0 +1,29 @@
+class FichePatient {
+    String nom;
+    String prenom;
+    String adresse;
+    String telephone;
+    String dateNaissance;
+    String sexe;
+    TerrainMedical terrainMedical;
+
+    public FichePatient(String nom, String prenom, String adresse, String telephone, String dateNaissance, String sexe) {
+        this.nom = nom;
+        this.prenom = prenom;
+        this.adresse = adresse;
+        this.telephone = telephone;
+        this.dateNaissance = dateNaissance;
+        this.sexe = sexe;
+        this.terrainMedical = new TerrainMedical();
+    }
+
+    public void afficherFiche() {
+        System.out.println("Nom : " + nom);
+        System.out.println("Prénom : " + prenom);
+        System.out.println("Adresse : " + adresse);
+        System.out.println("Téléphone : " + telephone);
+        System.out.println("Date de naissance : " + dateNaissance);
+        System.out.println("Sexe : " + sexe);
+        terrainMedical.afficherTerrain();
+    }
+}
