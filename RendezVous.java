@@ -1,10 +1,9 @@
 package projetpoo;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
+public class RendezVous {
 
-public class RendezVous{
-        private LocalDate date;
+    private LocalDate date;
 	private LocalTime heure;
 	private Patient patient;
 	private boolean medecinDisponible;
@@ -15,7 +14,6 @@ public class RendezVous{
 		this.patient = patient;
 		this.medecinDisponible = medecinDisponible ;
 	}
-
 	public LocalDate getDate() {
 		return date;
 	}
@@ -39,7 +37,6 @@ public class RendezVous{
 	public void setPatient(Patient patient) {
 		this.patient = patient;
 	}
-
 	public boolean getMedecinDisponible() {
 		return medecinDisponible;
 	}
@@ -47,6 +44,9 @@ public class RendezVous{
 	public void setMedecinDisponible(boolean medecinDisponible) {
 		this.medecinDisponible = medecinDisponible;
 	}
+	public boolean isDateValid() {
+        return !date.isBefore(LocalDate.now()) || (date.equals(LocalDate.now()) && heure.isAfter(LocalTime.now()));
+    }
 
 	public void afficherRendezVous() {
 		    System.out.println("Rendez-vous de " + patient.getNom() + " " + patient.getPrenom());
@@ -54,23 +54,26 @@ public class RendezVous{
 	        System.out.println("Médecin disponible : " + medecinDisponible);
 	        System.out.println("Informations du patient : " + patient);
 	}
-
-	  public void modifier(LocalDate nouvelleDate, LocalTime nouvelleHeure) {
-	        this.date = nouvelleDate;
-	        this.heure = nouvelleHeure;
-	        System.out.println("Rendez-vous modifié pour " + patient.getNom() + " " + patient.getPrenom() + " le " + date + " à " + heure);
+	 public void modifier(LocalDate nouvelleDate, LocalTime nouvelleHeure) {
+	        if (!nouvelleDate.isBefore(LocalDate.now()) || (nouvelleDate.equals(LocalDate.now()) && nouvelleHeure.isAfter(LocalTime.now()))) {
+	            this.date = nouvelleDate;
+	            this.heure = nouvelleHeure;
+	            System.out.println("Rendez-vous modifié pour " + patient.getNom() + " " + patient.getPrenom() + " le " + date + " à " + heure);
+	        } else {
+	            System.out.println("Date/heure invalide.");
+	        }
 	    }
-
 	    public void annuler() {
 	        System.out.println("Rendez-vous annulé pour " + patient.getNom() + " " + patient.getPrenom());
 	    }
 	
-	 public void planifier() {
+	 public boolean planifier() {
 	        if (medecinDisponible) {
 	            System.out.println("Rendez-vous planifié pour " + patient.getNom() + " " + patient.getPrenom() + " le " + date + " à " + heure);
+	            return true;
 	        } else {
 	            System.out.println("Le médecin n'est pas disponible.");
+	            return false;
 	        }
-	    }
-
+	 }
 }

@@ -1,26 +1,26 @@
 package projetpoo;
-
+import java.time.LocalDate;
 public class Person {
 
 	 private String nom;
 	 private String prenom;
-	 private String date_de_naissance ;
+	 private LocalDate date_de_naissance;
 	 private String lieu_de_naissance;
 	 private String sexe;
 	 private String address;
-	 private int nmbtelephone;
+	 private int numeroTelephone;
 	 private String groupage;
 	 
 	 
-	public Person(String nom,String prenom, String date_de_naissance,String lieu_de_naissance,String sexe,String address,int nmbtelephone,String groupage){
+	public Person(String nom,String prenom,LocalDate date_de_naissance,String lieu_de_naissance,String sexe,String address,int numeroTelephone,String groupage){
 		this.nom=nom;
 		this.prenom=prenom;
-		this.date_de_naissance=date_de_naissance;
+		this.date_de_naissance= date_de_naissance;
 		this.lieu_de_naissance=lieu_de_naissance;
 		this.sexe=sexe;
 		this.address=address;
-		this.nmbtelephone=nmbtelephone;
-		this.groupage=groupage;
+		setNumeroTelephone(numeroTelephone); 
+        setGroupage(groupage);
 		
 	 };
 	 
@@ -38,10 +38,10 @@ public class Person {
 	public void setPrenom(String prenom) {
 		this.prenom = prenom;
 	}
-	public String getDate_de_naissance() {
+	public LocalDate getDate_de_naissance() {
 		return date_de_naissance;
 	}
-	public void setDate_de_naissance(String date_de_naissance) {
+	public void setDate_de_naissance(LocalDate date_de_naissance) {
 		this.date_de_naissance = date_de_naissance;
 	}
 	public String getLieu_de_naissance() {
@@ -56,26 +56,35 @@ public class Person {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	public int getNmbtelephone() {
-		return nmbtelephone;
-	}
-	public void setNmbtelephone(int nmbtelephone) {
-		this.nmbtelephone = nmbtelephone;
-	}
 	public String getSexe() {
 		return sexe;
 	}
 	public void setSexe(String sex) {
 		this.sexe = sex;
 	}
-	public String getGroupage() {
-		return groupage;
-	}
-	public void setGroupage(String groupage) {
-		this.groupage = groupage;
-	}
+	 public int getNumeroTelephone() {
+	        return numeroTelephone;
+	    }
+
+	    public void setNumeroTelephone(int numeroTelephone) {
+	        if (numeroTelephone > 0) {
+	            this.numeroTelephone = numeroTelephone;
+	        } else {
+	            throw new IllegalArgumentException("Le numéro de téléphone doit être un nombre positif.");
+	        }
+	    }
+	    
+	    public String getGroupage() {
+	        return groupage;
+	    }
+
+	    public void setGroupage(String groupage) {
+	        if (groupage.matches("^(A|B|AB|O)[+-]$")) { 
+	            this.groupage = groupage;
+	        } else {
+	            throw new IllegalArgumentException("Le groupage doit être valide (exemple : A+, B-, O+).");
+	        }
+	        }
 	
-	 public void afficher_info() {
-		 System.out.println("NOM: "+ nom +"PRENOM: "+ prenom + "DATE DE NAISSANCE : "+ date_de_naissance + "LIEU DE NAISSANCE : " + lieu_de_naissance +"SEXE: "+sexe+"ADDRESS: "+address+"GROUPAGE: "+groupage +"NUMERO DE TELEPHONE: " + nmbtelephone );
-	 }
+	
 }
